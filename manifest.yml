@@ -1,0 +1,5 @@
+---
+applications:
+- name: nginx-secure-angular
+  memory: 64M
+  buildpack: staticfile_buildpack

@@ -1,0 +1,37 @@
+<html>
+<head>
+<script>
+function tryWeirdHttpMethod() {
+  if (window.XMLHttpRequest) {
+    xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+      var DONE = this.DONE || 4;
+      if(this.readyState === DONE){
+        alert("Status Code: " + xmlhttp.status);
+      }
+    }
+
+    xmlhttp.open("FOOBAR", "/", false);
+    xmlhttp.send(null);
+  }
+}
+</script>
+</head>
+<body>
+<h1>Tests</h1>
+<div>
+Look at dev tools to validate all the correct headers are there.
+</div>
+<div>
+The only one we can't configure in the Staticfile buildpack today is the server header.  Block that at the F5 or wait for the forthcoming <a href="https://github.com/cloudfoundry/nginx-buildpack">nginx-buildpack</a>.
+</div>
+<ul>
+	<li><a href="/angular/index.html">Angular Deep Linking Test</a></li>
+	<li><a href="foo.bar">Files with bad extensions are blocked</a></li>
+	<li><a href="#" onclick="tryWeirdHttpMethod()">Requests with unallowed HTTP methods are blocked</a></li>
+	<li>And specifically, <a href="Web.config">Web.config is blocked</a>.</li>
+	<li><a href="/wSvGsDbFwAog7yuj2OqB7ygj3FVCmHPQ2OjQ43n5I7MJov1bqO4lhCsMuMz2Cos3pnY32OVQVv84T2FYJjztAc4FC1A13UkThMsDPGdtDOHZBj0BUvyrBRv567JB32uvRKV0Mqi00SazY2gLWRitfXrvfWPDQxakTCUzL39Fky0CqJXbJ0QkVAioXRY80K4SfvI454iS40xnJmDqHgSguwRuqsVH97nhfVQUUzhDkFMy2XcaULACLB1YTtMLSwlb5NKpTVSgRQRAsqsMEF4hkKuGUXPq1jBvX83aCj532P0kMhw9OaA5d1cPZ3gf7wF9zCYhplh95wkwHLV36cYztr1M9jlPAg3vJTOraRldnc1g7Lr3JpEtIHalYXaHVFMMJ34LwPg6tdeKrY0b3Lb984b5hs99ae6j351ogSLGCh5iuOz0ZpTiMeQcEjumvdUEbd3VBbw7CsP2uifORIfNIgfkY4r2QkBsFKXday9Uvg3txg72Ggmci">Really long request URLs are blocked.</a></li>
+</ul>
+</body>
+</html>
